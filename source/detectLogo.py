@@ -50,7 +50,7 @@ model = KNeighborsClassifier(n_neighbors=1)
 model.fit(hists, labels)
 
 # Check Test Images for Model
-for (imagePath) in glob.glob("../ford/*.*"):
+for (imagePath) in glob.glob("../mixLogo/*.*"):
     # Read Images
     image = cv.imread(imagePath)
     try:
@@ -76,7 +76,7 @@ for (imagePath) in glob.glob("../ford/*.*"):
         image = cv.resize(image, (reWidth, 300))
 
         # Write predicted label over the Image
-        cv.putText(image, predict.title(), (10, 30), cv.FONT_HERSHEY_TRIPLEX, 1.0, (0 ,255, 0), 2)
+        cv.putText(image, predict.title(), (10, 30), cv.FONT_HERSHEY_TRIPLEX, 1.2, (0 ,255, 0), 4)
 
         # Get Image name and show Image
         imageName = imagePath.split("/")[-1]
