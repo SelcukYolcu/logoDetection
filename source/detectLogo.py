@@ -3,11 +3,19 @@ from skimage import exposure, feature
 import numpy as np
 import cv2 as cv
 import glob
+import os
 
+# Get Paths
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+head, _ = os.path.split(ROOT_DIR)
+trainingPath = head + "/" + "logos"
+testPath = head + "/" + "mixLogo"
+
+# Init Lists
 hists = [] # histogram of Image
 labels = [] # Label of Image
 
-for imagePath in glob.glob("../logos/*/*.*"):
+for imagePath in glob.glob(trainingPath + "/*/*.*"):
     # get label from folder name
     label = imagePath.split("/")[-2]
     
@@ -50,7 +58,7 @@ model = KNeighborsClassifier(n_neighbors=1)
 model.fit(hists, labels)
 
 # Check Test Images for Model
-for (imagePath) in glob.glob("../mixLogo/*.*"):
+for (imagePath) in glob.glob(testPath + "/*.*"):
     # Read Images
     image = cv.imread(imagePath)
     try:
